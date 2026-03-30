@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Host: https://kontentfire.com
+Sitemap: https://kontentfire.com/sitemap.xml
