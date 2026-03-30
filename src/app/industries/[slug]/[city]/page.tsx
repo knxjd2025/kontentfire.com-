@@ -47,21 +47,9 @@ function getTopCitySlugs(n: number): string[] {
     .map((c) => c.slug);
 }
 
-// Pre-generate top 5 industries x top 10 cities (50 pages) at build time.
-// All other combinations are generated on-demand and cached (ISR).
+// All pages generated on-demand and cached (ISR).
 export async function generateStaticParams() {
-  const topIndustrySlugs = getTopIndustrySlugs(5);
-  const topCitySlugs = getTopCitySlugs(10);
-
-  const params: Array<{ slug: string; city: string }> = [];
-
-  for (const slug of topIndustrySlugs) {
-    for (const city of topCitySlugs) {
-      params.push({ slug, city });
-    }
-  }
-
-  return params;
+  return [];
 }
 
 export const dynamicParams = true;

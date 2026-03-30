@@ -29,9 +29,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const chapters = getAllChapters();
-  return chapters.map((ch) => ({ slug: ch.slug }));
+  return [];
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,

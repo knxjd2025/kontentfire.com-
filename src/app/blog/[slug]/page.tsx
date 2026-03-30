@@ -688,15 +688,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  let posts: GHLBlogPost[] = [];
-  if (process.env.GHL_BLOG_ID && process.env.GHL_REFRESH_TOKEN) {
-    posts = await getBlogPosts(process.env.GHL_BLOG_ID);
-  }
-  if (posts.length === 0) {
-    return Object.keys(fallbackPosts).map((slug) => ({ slug }));
-  }
-  return posts.map((post) => ({ slug: post.slug }));
+  return [];
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;

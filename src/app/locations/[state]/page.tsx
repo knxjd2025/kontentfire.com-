@@ -12,9 +12,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const states = getAllStates();
-  return states.map(state => ({ state: state.slug }));
+  return [];
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { state: stateSlug } = await params;

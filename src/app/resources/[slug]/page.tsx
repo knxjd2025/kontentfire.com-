@@ -21,9 +21,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const resources = getAllResources();
-  return resources.map((r) => ({ slug: r.slug }));
+  return [];
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;

@@ -22,16 +22,9 @@ interface PageProps {
   params: Promise<{ state: string; city: string }>;
 }
 
-// Pre-generate top 20 cities at build time. All others generated on-demand (ISR).
+// All pages generated on-demand and cached.
 export async function generateStaticParams() {
-  const allCities = getAllCities();
-  const topCities = allCities
-    .sort((a, b) => b.population - a.population)
-    .slice(0, 20);
-  return topCities.map(city => ({
-    state: city.stateSlug,
-    city: city.slug,
-  }));
+  return [];
 }
 
 export const dynamicParams = true;

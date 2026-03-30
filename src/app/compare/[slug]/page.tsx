@@ -28,9 +28,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const comparisons = getAllComparisons();
-  return comparisons.map((c) => ({ slug: c.slug }));
+  return [];
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
