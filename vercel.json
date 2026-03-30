@@ -1,0 +1,8 @@
+{
+  "buildCommand": "next build --no-turbopack",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "env": {
+    "NODE_OPTIONS": "--max-old-space-size=7168"
+  }
+}

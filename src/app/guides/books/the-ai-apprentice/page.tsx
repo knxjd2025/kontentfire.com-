@@ -3,6 +3,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import Image from 'next/image';
 import Link from 'next/link';
+
+// Force dynamic rendering — this page reads 12 manuscript files (55K words)
+export const dynamic = 'force-dynamic';
 import { Navigation } from '@/components/sections/navigation';
 import { Footer } from '@/components/sections/footer';
 import { Breadcrumb } from '@/components/seo/breadcrumb-schema';
