@@ -46,3 +46,7 @@ public/book-images/
 book/images/
 book/node_modules/
 public/books/
+
+# scratch / debug artifacts
+/*.png
+.playwright-mcp/
