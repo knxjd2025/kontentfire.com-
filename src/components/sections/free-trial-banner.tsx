@@ -6,7 +6,7 @@ const benefits = [
   'Full AI content generation',
   'Multi-platform publishing',
   'Smart scheduling',
-  'No credit card required',
+  'Cancel anytime',
 ];
 
 export function FreeTrialBanner() {
@@ -37,7 +37,7 @@ export function FreeTrialBanner() {
 
         <p className="mt-4 text-sm text-orange-100 flex items-center justify-center gap-1.5">
           <Shield className="h-3.5 w-3.5" />
-          No credit card required. Cancel anytime.
+          Cancel anytime. Secure checkout.
         </p>
       </div>
     </section>
