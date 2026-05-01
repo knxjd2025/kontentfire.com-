@@ -986,3 +986,1052 @@ body:has(.preview-root) {
     font-size: clamp(48px, 14vw, 96px);
   }
 }
+
+/* ============================================================
+   HERO VARIANT PROPOSALS — three takes on the system
+   /preview/heroes
+   ============================================================ */
+
+/* ---- Shared label between variants ---- */
+.variant-label {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 28px;
+  padding: 56px 0 26px;
+  border-top: 1px dashed rgba(20, 20, 19, 0.18);
+}
+.variant-label .num {
+  font-size: clamp(64px, 8vw, 112px);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  color: var(--signal);
+}
+.variant-label .name {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding-bottom: 6px;
+}
+.variant-label .desc {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--granite);
+  max-width: 380px;
+  padding-bottom: 8px;
+  font-weight: 450;
+}
+@media (max-width: 800px) {
+  .variant-label {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 14px 22px;
+  }
+  .variant-label .desc {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   A. STADIUM CINEMA — overlay everything on the video
+   ============================================================ */
+
+.hero-cinema {
+  position: relative;
+  height: clamp(540px, 78vh, 760px);
+  border-radius: var(--r-hero);
+  overflow: hidden;
+  isolation: isolate;
+  background: #141413;
+}
+.hero-cinema .hero-video {
+  filter: sepia(0.18) saturate(1.25) hue-rotate(-6deg) brightness(0.78)
+    contrast(1.06);
+}
+.hero-cinema-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+      180deg,
+      rgba(20, 20, 19, 0.0) 0%,
+      rgba(20, 20, 19, 0.0) 38%,
+      rgba(20, 20, 19, 0.55) 78%,
+      rgba(20, 20, 19, 0.85) 100%
+    ),
+    radial-gradient(
+      ellipse at 8% 100%,
+      rgba(20, 20, 19, 0.55) 0%,
+      transparent 60%
+    );
+}
+
+.hero-cinema-chip {
+  position: absolute;
+  top: clamp(20px, 3vw, 32px);
+  left: clamp(20px, 3vw, 32px);
+  background: rgba(243, 240, 238, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--ink);
+  padding: 9px 18px 9px 14px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+.hero-cinema-chip .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  position: relative;
+}
+.hero-cinema-chip .live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--signal);
+  opacity: 0.6;
+  animation: live-ring 1.8s ease-out infinite;
+}
+@keyframes live-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.hero-cinema-play {
+  position: absolute;
+  top: clamp(20px, 3vw, 32px);
+  right: clamp(20px, 3vw, 32px);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(243, 240, 238, 0.95);
+  border: 0;
+  cursor: pointer;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 220ms, transform 220ms
+    cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hero-cinema-play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 14px solid var(--ink);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  margin-left: 4px;
+}
+.hero-cinema-play:hover {
+  background: var(--signal);
+  transform: scale(1.06);
+}
+
+.hero-cinema-content {
+  position: absolute;
+  left: clamp(28px, 5vw, 64px);
+  right: clamp(28px, 5vw, 64px);
+  bottom: clamp(28px, 4.5vw, 56px);
+  z-index: 2;
+  max-width: 740px;
+  color: var(--canvas);
+}
+.hero-cinema-content .t-h1 {
+  color: var(--canvas);
+}
+.hero-cinema-content .t-eyebrow {
+  color: var(--signal-light);
+}
+.hero-cinema-content .t-eyebrow::before {
+  background: var(--signal-light);
+}
+.hero-cinema-content .body {
+  color: rgba(243, 240, 238, 0.82);
+  margin-top: 22px;
+  max-width: 540px;
+}
+
+.hero-cinema-cta-row {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero-cinema-cta-row .btn-ink {
+  background: var(--canvas);
+  color: var(--ink);
+  border-color: var(--canvas);
+}
+.hero-cinema-cta-row .btn-ink:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--canvas);
+}
+.hero-cinema-cta-row .btn-outline {
+  background: transparent;
+  color: var(--canvas);
+  border-color: rgba(243, 240, 238, 0.7);
+}
+.hero-cinema-cta-row .btn-outline:hover {
+  background: var(--canvas);
+  color: var(--ink);
+  border-color: var(--canvas);
+}
+.hero-cinema-cta-row .trust {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 450;
+  color: rgba(243, 240, 238, 0.65);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   B. ASYMMETRIC PILL — vertical 999px pill video
+   ============================================================ */
+
+.hero-pill-stage {
+  position: relative;
+}
+.hero-pill-stage .ghost-watermark {
+  font-size: clamp(96px, 13vw, 180px);
+  color: var(--ghost);
+  z-index: 0;
+}
+
+.pill-video-wrap {
+  position: relative;
+  margin-left: auto;
+  max-width: 460px;
+  padding-right: 32px;
+  padding-bottom: 24px;
+}
+
+.pill-video {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  isolation: isolate;
+  background: #141413;
+}
+.pill-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) saturate(1.3) hue-rotate(-6deg) brightness(0.92)
+    contrast(1.05);
+}
+.pill-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(20, 20, 19, 0.0) 0%,
+      rgba(20, 20, 19, 0.0) 50%,
+      rgba(20, 20, 19, 0.55) 100%
+    ),
+    radial-gradient(
+      ellipse at 70% 20%,
+      rgba(251, 146, 60, 0.18) 0%,
+      transparent 55%
+    );
+}
+.pill-video-counter {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  background: rgba(243, 240, 238, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink);
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pill-video-counter::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 7px solid var(--ink);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+}
+.pill-video-meta {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  z-index: 2;
+  color: var(--canvas);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pill-video-meta .duration {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.78;
+}
+.pill-video-wrap .satellite {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.hero-pill-arc {
+  position: absolute;
+  top: 36%;
+  left: 38%;
+  width: 360px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-pill-arc path {
+  fill: none;
+  stroke: var(--signal-light);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: orbit-trace 2.0s cubic-bezier(0.65, 0, 0.35, 1) 0.55s forwards;
+}
+
+@media (max-width: 1023px) {
+  .hero-pill-arc {
+    display: none;
+  }
+  .pill-video-wrap {
+    margin-left: 0;
+    margin-right: auto;
+    padding-right: 28px;
+  }
+}
+
+/* ============================================================
+   C. CIRCULAR ORBIT — constellation hero
+   ============================================================ */
+
+.hero-orbit-stage {
+  position: relative;
+  height: clamp(580px, 82vh, 740px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.hero-orbit-watermark {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(96px, 16vw, 220px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: var(--ghost);
+  white-space: nowrap;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-orbit-stage .orbit-arc-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-orbit-stage .orbit-arc-svg path {
+  fill: none;
+  stroke: var(--signal-light);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: orbit-trace 2.6s cubic-bezier(0.65, 0, 0.35, 1) 0.6s forwards;
+}
+
+.circle-video-portrait {
+  position: relative;
+  width: clamp(300px, 36vw, 460px);
+  height: clamp(300px, 36vw, 460px);
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0, 0.10) 0 30px 80px,
+    rgba(249, 115, 22, 0.18) 0 0 120px 0;
+  background: #141413;
+}
+.circle-video-portrait video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.2) saturate(1.3) hue-rotate(-6deg) brightness(0.94)
+    contrast(1.05);
+}
+.circle-video-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    rgba(20, 20, 19, 0.45) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.circle-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.circle-play-btn {
+  pointer-events: auto;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(243, 240, 238, 0.92);
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 220ms;
+}
+.circle-play-btn::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 240, 238, 0.5);
+  animation: ring-pulse 2.6s ease-out infinite;
+}
+.circle-play-btn::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 18px solid var(--ink);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 5px;
+}
+.circle-play-btn:hover {
+  transform: scale(1.06);
+  background: var(--canvas);
+}
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.platform-satellite {
+  position: absolute;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--canvas);
+  border: 1px solid rgba(20, 20, 19, 0.10);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 16px 32px;
+  z-index: 3;
+  text-decoration: none;
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 220ms;
+}
+.platform-satellite:hover {
+  transform: translateY(-3px);
+  border-color: var(--signal);
+}
+.platform-satellite .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.hero-orbit-copy {
+  text-align: center;
+  max-width: 660px;
+  margin: 56px auto 0;
+}
+.hero-orbit-copy .t-eyebrow {
+  display: inline-flex;
+  margin-bottom: 18px;
+}
+.hero-orbit-copy .t-h1 {
+  font-size: clamp(34px, 4.4vw, 52px);
+}
+.hero-orbit-copy-cta {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero-orbit-copy-cta .trust {
+  margin-left: 6px;
+  font-size: 13px;
+  color: var(--slate);
+}
+
+@media (max-width: 880px) {
+  .hero-orbit-stage {
+    height: clamp(520px, 95vw, 620px);
+  }
+  .platform-satellite {
+    width: 78px;
+    height: 78px;
+    font-size: 10.5px;
+  }
+  .platform-satellite .dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* ============================================================
+   D. FULL-BLEED CINEMA — 100vh luxury brand-film hero (/preview5)
+   ============================================================ */
+
+.hero-fullscreen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  max-height: 1120px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #141413;
+}
+
+/* Slow Ken Burns drift on the video for atmospheric motion */
+.hero-fullscreen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.14) saturate(1.18) hue-rotate(-4deg) brightness(0.74)
+    contrast(1.08);
+  transform-origin: 60% 50%;
+  animation: ken-burns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes ken-burns {
+  from {
+    transform: scale(1.0) translate(0, 0);
+  }
+  to {
+    transform: scale(1.07) translate(-1.2%, -0.8%);
+  }
+}
+
+/* Subtle film-grain overlay for tactile cinematic quality */
+.hero-fullscreen-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.10;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-fullscreen-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+      180deg,
+      rgba(20, 20, 19, 0.12) 0%,
+      rgba(20, 20, 19, 0.0) 22%,
+      rgba(20, 20, 19, 0.0) 48%,
+      rgba(20, 20, 19, 0.55) 78%,
+      rgba(20, 20, 19, 0.92) 100%
+    ),
+    radial-gradient(
+      ellipse at 8% 95%,
+      rgba(20, 20, 19, 0.62) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(20, 20, 19, 0.45) 0%,
+      transparent 50%
+    );
+}
+
+/* Soft cream fade-out at the bottom edge */
+.hero-fullscreen::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+  z-index: 6;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--canvas) 100%
+  );
+  pointer-events: none;
+}
+
+/* ----- Floating nav: frosted glass over the video ----- */
+.hero-fullscreen-nav-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.hero-fullscreen-nav-wrap .nav-pill {
+  background: rgba(252, 251, 250, 0.82);
+  -webkit-backdrop-filter: saturate(150%) blur(12px);
+  backdrop-filter: saturate(150%) blur(12px);
+  box-shadow: rgba(0, 0, 0, 0.10) 0 8px 30px;
+}
+
+/* ----- Stage that mirrors the nav-pill's max-width grid so the
+        LIVE chip, headline, body, and CTAs all sit on the same
+        vertical rail as the KontentFire logo. ----- */
+.hero-fullscreen-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+  /* Top padding clears the floating nav (48px margin + ~64px height).
+     Bottom padding matches the cream fade-out height so the content is
+     visually centered between the nav-bottom and the next section. */
+  padding-top: clamp(108px, 13vh, 160px);
+  padding-bottom: clamp(72px, 8vh, 104px);
+}
+.hero-fullscreen-stage-row {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  /* matches nav-pill internal padding-left: 24px */
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.hero-fullscreen-stage-row > * {
+  pointer-events: auto;
+}
+
+/* ----- Editorial multi-segment status bar (top-left) ----- */
+.hero-fullscreen-status {
+  display: flex;
+  width: fit-content;
+  background: rgba(243, 240, 238, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--ink);
+  padding: 11px 22px;
+  border-radius: var(--r-pill);
+  align-items: center;
+  gap: 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-fullscreen-status .status-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.hero-fullscreen-status .status-segment .play-glyph {
+  width: 0;
+  height: 0;
+  border-left: 6px solid var(--ink);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.hero-fullscreen-status .status-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(20, 20, 19, 0.18);
+}
+.hero-fullscreen-status .live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  position: relative;
+}
+.hero-fullscreen-status .live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--signal);
+  opacity: 0.6;
+  animation: live-ring 1.8s ease-out infinite;
+}
+
+/* ----- Timecode HUD (top-right) ----- */
+.hero-fullscreen-timecode {
+  position: absolute;
+  top: clamp(120px, 14vh, 168px);
+  right: clamp(28px, 5vw, 80px);
+  z-index: 3;
+  color: rgba(243, 240, 238, 0.92);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border: 1px solid rgba(243, 240, 238, 0.22);
+  border-radius: var(--r-pill);
+  background: rgba(20, 20, 19, 0.32);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.hero-fullscreen-timecode .rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: rec-blink 1.4s ease-in-out infinite;
+}
+@keyframes rec-blink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.25; }
+}
+.hero-fullscreen-timecode .time-now {
+  color: var(--canvas);
+}
+.hero-fullscreen-timecode .time-divider {
+  opacity: 0.55;
+}
+.hero-fullscreen-timecode .time-total {
+  opacity: 0.7;
+}
+
+/* ----- Vertical right-edge rail (rotated metadata) ----- */
+.hero-fullscreen-rail {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: 100% 50%;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: rgba(243, 240, 238, 0.62);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.hero-fullscreen-rail .rail-line {
+  display: inline-block;
+}
+.hero-fullscreen-rail .rail-divider {
+  width: 22px;
+  height: 1px;
+  background: rgba(243, 240, 238, 0.4);
+}
+
+/* ----- Content stack (bottom-left) ----- */
+.hero-fullscreen-content {
+  width: min(680px, 100%);
+  color: var(--canvas);
+}
+
+.hero-fullscreen-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--signal-light);
+}
+.hero-fullscreen-eyebrow .accent-line {
+  width: 36px;
+  height: 1px;
+  background: var(--signal-light);
+}
+
+.hero-fullscreen-content .t-h1 {
+  color: var(--canvas);
+  font-size: clamp(52px, 9vw, 128px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.hero-fullscreen-content .italic-accent {
+  font-style: italic;
+  color: var(--signal-light);
+  font-weight: 500;
+  /* Slight optical compensation for italic */
+  letter-spacing: -0.02em;
+}
+
+.hero-fullscreen-content .body {
+  color: rgba(243, 240, 238, 0.86);
+  margin-top: 32px;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 450;
+}
+
+.hero-fullscreen-cta-row {
+  margin-top: 40px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hero-fullscreen-cta-row .btn-ink {
+  background: var(--canvas);
+  color: var(--ink);
+  border-color: var(--canvas);
+  padding: 14px 28px;
+  font-size: 16px;
+}
+.hero-fullscreen-cta-row .btn-ink:hover {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--canvas);
+}
+.hero-fullscreen-cta-row .btn-outline {
+  background: transparent;
+  color: var(--canvas);
+  border-color: rgba(243, 240, 238, 0.7);
+  padding: 14px 28px;
+  font-size: 16px;
+}
+.hero-fullscreen-cta-row .btn-outline:hover {
+  background: var(--canvas);
+  color: var(--ink);
+  border-color: var(--canvas);
+}
+.hero-fullscreen-cta-row .trust {
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 450;
+  color: rgba(243, 240, 238, 0.7);
+  letter-spacing: 0.02em;
+}
+
+/* ----- Sliding stats ticker (bottom edge) ----- */
+.hero-fullscreen-ticker {
+  position: absolute;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  overflow: hidden;
+  padding: 14px 0;
+  border-top: 1px solid rgba(243, 240, 238, 0.14);
+  border-bottom: 1px solid rgba(243, 240, 238, 0.14);
+  background: rgba(20, 20, 19, 0.32);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 4%,
+    black 96%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 4%,
+    black 96%,
+    transparent
+  );
+}
+.hero-fullscreen-ticker .ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 56px;
+  white-space: nowrap;
+  animation: ticker-slide 48s linear infinite;
+  color: rgba(243, 240, 238, 0.78);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding-right: 56px;
+}
+.hero-fullscreen-ticker .ticker-track > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+.hero-fullscreen-ticker .ticker-track .bullet {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal-light);
+}
+@keyframes ticker-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ----- Subtle viewfinder corner brackets ----- */
+.hero-fullscreen-frame {
+  position: absolute;
+  top: clamp(108px, 13vh, 152px);
+  left: clamp(20px, 3.5vw, 56px);
+  right: clamp(20px, 3.5vw, 56px);
+  bottom: 138px;
+  pointer-events: none;
+  z-index: 5;
+}
+.hero-fullscreen-frame .corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(243, 240, 238, 0.45);
+}
+.hero-fullscreen-frame .corner.tl {
+  top: 0;
+  left: 0;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.hero-fullscreen-frame .corner.tr {
+  top: 0;
+  right: 0;
+  border-top: 1.5px solid;
+  border-right: 1.5px solid;
+}
+.hero-fullscreen-frame .corner.bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1.5px solid;
+  border-left: 1.5px solid;
+}
+.hero-fullscreen-frame .corner.br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 880px) {
+  .hero-fullscreen-content {
+    bottom: 130px;
+  }
+  .hero-fullscreen-content .t-h1 {
+    font-size: clamp(44px, 13vw, 76px);
+  }
+  .hero-fullscreen-content .body {
+    font-size: 16px;
+    margin-top: 22px;
+  }
+  .hero-fullscreen-status {
+    font-size: 10px;
+    padding: 9px 16px;
+    gap: 10px;
+  }
+  .hero-fullscreen-status .status-divider {
+    height: 11px;
+  }
+  /* Hide the second half of the status bar on narrow screens */
+  .hero-fullscreen-status .seg-secondary {
+    display: none;
+  }
+  .hero-fullscreen-timecode {
+    font-size: 11.5px;
+    padding: 9px 12px;
+  }
+  .hero-fullscreen-rail {
+    display: none;
+  }
+  .hero-fullscreen-frame {
+    display: none;
+  }
+  .hero-fullscreen-ticker {
+    bottom: 56px;
+  }
+  .hero-fullscreen-ticker .ticker-track {
+    gap: 36px;
+    font-size: 10px;
+  }
+}
