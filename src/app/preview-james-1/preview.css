@@ -1,0 +1,395 @@
+/* ============================================================
+   /preview-james-1 — full visual port of the Claude Design bundle
+   "KontentFire Redesign.html". Scoped to .pj1-root so it cannot
+   leak into the rest of the site.
+   ============================================================ */
+
+.pj1-root {
+  --ivory: #FBF7F1;
+  --ivory-2: #F5EDDF;
+  --paper: #FFFDF9;
+  --ink: #1A0F08;
+  --ink-2: #3A2418;
+  --ink-soft: #6B5447;
+  --ember: #E8451E;
+  --ember-2: #C9351A;
+  --amber: #F2A93C;
+  --coral: #F26B4F;
+  --rose: #FFD7B5;
+  --hairline: rgba(26, 15, 8, 0.10);
+  --hairline-strong: rgba(26, 15, 8, 0.18);
+
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-pj1-sans), 'Inter', system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  overflow-x: clip;
+}
+
+.pj1-root *,
+.pj1-root *::before,
+.pj1-root *::after {
+  box-sizing: border-box;
+}
+
+.pj1-root .serif {
+  font-family: var(--font-pj1-serif), 'Instrument Serif', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.pj1-root .mono {
+  font-family: var(--font-pj1-mono), 'JetBrains Mono', monospace;
+}
+
+/* Subtle paper grain */
+.pj1-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(rgba(26, 15, 8, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(26, 15, 8, 0.02) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  opacity: .6;
+  mix-blend-mode: multiply;
+}
+
+.pj1-root .fire-text {
+  background: linear-gradient(96deg, #E8451E 0%, #F26B4F 35%, #F2A93C 75%, #E8451E 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pj1-fireshift 7s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(232, 69, 30, .25), 0 0 60px rgba(242, 169, 60, .15);
+}
+@keyframes pj1-fireshift {
+  0%, 100% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+}
+
+.pj1-root .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .85rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .95rem;
+  line-height: 1;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.pj1-root .btn-primary {
+  background: linear-gradient(180deg, #F2683A 0%, #E8451E 100%);
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset, 0 8px 22px -8px rgba(232, 69, 30, .55), 0 1px 2px rgba(26, 15, 8, .15);
+}
+.pj1-root .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .4) inset, 0 14px 30px -10px rgba(232, 69, 30, .6), 0 1px 2px rgba(26, 15, 8, .2);
+}
+.pj1-root .btn-ghost {
+  background: rgba(255, 253, 249, .7);
+  color: var(--ink);
+  border: 1px solid var(--hairline-strong);
+  backdrop-filter: blur(8px);
+}
+.pj1-root .btn-ghost:hover {
+  background: #fff;
+  border-color: var(--ink);
+}
+.pj1-root .btn-dark {
+  background: var(--ink);
+  color: var(--ivory);
+}
+.pj1-root .btn-dark:hover {
+  background: var(--ink-2);
+}
+
+.pj1-root .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .4rem .85rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  background: var(--paper);
+  border: 1px solid var(--hairline-strong);
+  color: var(--ink-2);
+}
+
+.pj1-root .card {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 22px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 1px 2px rgba(26, 15, 8, .04), 0 24px 48px -32px rgba(26, 15, 8, .12);
+}
+
+.pj1-root .hairline-divider { border-top: 1px solid var(--hairline) }
+
+.pj1-root .fire-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #F2A93C, #E8451E);
+  box-shadow: 0 0 0 3px rgba(232, 69, 30, .18), 0 0 12px rgba(232, 69, 30, .6);
+}
+
+.pj1-root .sec-label {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.pj1-root .sec-label::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E8451E, #F2A93C);
+  background-size: 200% 100%;
+  animation: pj1-shimmer-x 2.5s linear infinite;
+  display: block;
+  border-radius: 2px;
+}
+
+.pj1-root .container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+@media (max-width: 700px) {
+  .pj1-root .container { padding: 0 18px }
+}
+
+.pj1-root .h-display {
+  font-family: var(--font-pj1-serif), 'Instrument Serif', serif;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.pj1-root .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.pj1-root .reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pj1-root .nav-shell {
+  position: sticky;
+  top: 12px;
+  z-index: 40;
+  margin: 12px auto 0;
+  max-width: 1240px;
+  padding: 0 12px;
+}
+.pj1-root .nav-inner {
+  background: rgba(255, 253, 249, .78);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  padding: 8px 8px 8px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px -16px rgba(26, 15, 8, .18), 0 1px 0 rgba(255, 255, 255, .6) inset;
+}
+
+.pj1-root .dotgrid {
+  background-image: radial-gradient(rgba(26, 15, 8, .14) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ───── Flame cursor trail ───── */
+.pj1-root.cursor-on,
+.pj1-root.cursor-on a,
+.pj1-root.cursor-on button,
+.pj1-root.cursor-on .btn,
+.pj1-root.cursor-on [role="button"],
+.pj1-root.cursor-on input,
+.pj1-root.cursor-on textarea,
+.pj1-root.cursor-on select {
+  cursor: none;
+}
+@media (max-width: 880px) {
+  .pj1-root.cursor-on,
+  .pj1-root.cursor-on a,
+  .pj1-root.cursor-on button,
+  .pj1-root.cursor-on .btn { cursor: auto }
+  .pj1-flame-cursor,
+  .pj1-flame-trail { display: none !important }
+}
+.pj1-flame-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-9999px, -9999px);
+  will-change: transform;
+}
+.pj1-flame-cursor svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(232, 69, 30, .9)) drop-shadow(0 0 18px rgba(242, 169, 60, .6));
+}
+.pj1-flame-cursor .core {
+  animation: pj1-flame-bob .35s ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
+}
+@keyframes pj1-flame-bob {
+  0%   { transform: scaleY(1) scaleX(1) rotate(-2deg) }
+  100% { transform: scaleY(1.12) scaleX(.94) rotate(2deg) }
+}
+.pj1-flame-trail {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ───── Fire animations ───── */
+@keyframes pj1-ember-rise {
+  0%   { transform: translateY(0) translateX(0) scale(.6); opacity: 0 }
+  8%   { opacity: 1 }
+  50%  { transform: translateY(-60vh) translateX(15px) scale(1.1) }
+  100% { transform: translateY(-130vh) translateX(-20px) scale(.3); opacity: 0 }
+}
+@keyframes pj1-flicker {
+  0%, 100% { opacity: 1; filter: brightness(1) drop-shadow(0 0 0 rgba(232, 69, 30, 0)) }
+  25%      { opacity: .9; filter: brightness(1.15) drop-shadow(0 0 12px rgba(232, 69, 30, .4)) }
+  50%      { opacity: 1; filter: brightness(.95) drop-shadow(0 0 6px rgba(232, 69, 30, .2)) }
+  75%      { opacity: .94; filter: brightness(1.08) drop-shadow(0 0 16px rgba(242, 169, 60, .5)) }
+}
+@keyframes pj1-float-y {
+  0%, 100% { transform: translateY(0) rotate(0deg) }
+  50%      { transform: translateY(-12px) rotate(2deg) }
+}
+@keyframes pj1-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 69, 30, .6), 0 12px 32px -10px rgba(232, 69, 30, .45), 0 0 24px rgba(242, 169, 60, .3) }
+  50%      { box-shadow: 0 0 0 18px rgba(232, 69, 30, 0), 0 24px 50px -10px rgba(232, 69, 30, .7), 0 0 48px rgba(242, 169, 60, .5) }
+}
+@keyframes pj1-drift {
+  0%, 100% { transform: translateX(0) translateY(-50%) }
+  50%      { transform: translateX(12px) translateY(-50%) }
+}
+@keyframes pj1-ember-flicker {
+  0%, 100% { transform: scale(1) rotate(-3deg); opacity: .92; filter: brightness(1) }
+  50%      { transform: scale(1.1) rotate(3deg); opacity: 1; filter: brightness(1.2) }
+}
+@keyframes pj1-shimmer-x {
+  0%   { background-position: -200% 50% }
+  100% { background-position:  200% 50% }
+}
+@keyframes pj1-warmth {
+  0%, 100% { opacity: .55 }
+  50%      { opacity: .85 }
+}
+@keyframes pj1-scrollcue {
+  0%, 100% { opacity: .2; transform: scaleY(.6) }
+  50%      { opacity: .6; transform: scaleY(1) }
+}
+
+.pj1-root .anim-flicker    { animation: pj1-flicker 2.4s ease-in-out infinite }
+.pj1-root .anim-float      { animation: pj1-float-y 5s ease-in-out infinite }
+.pj1-root .anim-pulse-glow { animation: pj1-pulse-glow 2s ease-in-out infinite }
+.pj1-root .anim-drift      { animation: pj1-drift 4s ease-in-out infinite }
+.pj1-root .anim-flame      { animation: pj1-ember-flicker 2s ease-in-out infinite; transform-origin: 50% 100% }
+
+.pj1-root .ember {
+  position: absolute;
+  bottom: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: radial-gradient(circle, #FFFBEA 0%, #FFE7B0 20%, #F2A93C 50%, #E8451E 75%, transparent 90%);
+  filter: blur(.4px);
+  pointer-events: none;
+  animation: pj1-ember-rise linear infinite;
+  box-shadow: 0 0 10px rgba(242, 169, 60, .8), 0 0 20px rgba(232, 69, 30, .5);
+}
+
+.pj1-root .lift {
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, border-color .35s ease;
+}
+.pj1-root .lift:hover { transform: translateY(-8px) }
+.pj1-root .card.lift:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .6) inset,
+    0 1px 2px rgba(26, 15, 8, .04),
+    0 30px 60px -28px rgba(232, 69, 30, .5),
+    0 0 0 1px rgba(232, 69, 30, .35),
+    0 0 30px rgba(242, 169, 60, .2);
+  border-color: rgba(232, 69, 30, .4);
+}
+
+.pj1-root .warmth-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: pj1-warmth 5s ease-in-out infinite;
+}
+
+.pj1-root .shimmer-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(232, 69, 30, .6) 40%, #FFE7B0 48%, #F2A93C 50%, #E8451E 52%, rgba(232, 69, 30, .6) 60%, transparent 100%);
+  background-size: 200% 100%;
+  animation: pj1-shimmer-x 3s linear infinite;
+  box-shadow: 0 0 12px rgba(242, 169, 60, .4);
+}
+
+@media (max-width: 880px) {
+  .pj1-root .hide-md { display: none !important }
+  .pj1-root .nav-burger { display: inline-flex !important }
+}
+@media (max-width: 560px) {
+  .pj1-root .hide-sm { display: none !important }
+  .pj1-root .nav-shell { margin-top: 8px; padding: 0 8px }
+  .pj1-root .nav-inner { padding: 6px 6px 6px 14px }
+  .pj1-root .nav-cta { padding: .55rem .85rem !important; font-size: .8rem !important }
+}
+@media (max-width: 720px) {
+  .pj1-root section { padding-top: 64px !important; padding-bottom: 64px !important }
+  .pj1-root .h-display { font-size: clamp(2rem, 9vw, 3.2rem) !important }
+}
+@media (max-width: 480px) {
+  .pj1-root .container { padding: 0 16px }
+  .pj1-root .btn { padding: .85rem 1.1rem; font-size: .88rem }
+}
+
+/* Section-level grid breakpoints */
+@media (max-width: 920px) { .pj1-root .features-grid { grid-template-columns: 1fr 1fr !important } }
+@media (max-width: 600px) { .pj1-root .features-grid { grid-template-columns: 1fr !important } }
+@media (max-width: 880px) { .pj1-root .bf-grid { grid-template-columns: 1fr 1fr !important } }
+@media (max-width: 520px) { .pj1-root .bf-grid { grid-template-columns: 1fr !important } }
+@media (max-width: 780px) { .pj1-root .steps-grid { grid-template-columns: 1fr !important } }
+@media (max-width: 780px) { .pj1-root .plat-grid { grid-template-columns: 1fr 1fr !important } }
+@media (max-width: 880px) {
+  .pj1-root .price-grid { grid-template-columns: 1fr !important; gap: 16px !important }
+  .pj1-root .price-grid > .card { transform: none !important }
+}
+@media (max-width: 880px) { .pj1-root .t-grid { grid-template-columns: 1fr !important } }
+@media (max-width: 880px) { .pj1-root .footer-grid { grid-template-columns: 1fr 1fr !important } }
+@media (max-width: 520px) { .pj1-root .footer-grid { grid-template-columns: 1fr !important } }
